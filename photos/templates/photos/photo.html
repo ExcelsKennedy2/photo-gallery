@@ -1,0 +1,35 @@
+{% extends 'photos/base.html' %}
+{% load static %}
+{% block title %}Photo{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+    <div class="col">
+        <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Go Back</a>
+        <div style="height: 70vh;">
+            <img style="max-width: 100%; max-height: 100%" src="{{ photo.image.url }}" alt="photo" class="img-fluid">
+            <p>{{ photo.description }}</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="mt-5">
+    <h2 class="text-center">Related items</h2>
+
+    <div class="row">
+        {% for item in related_items %}
+            <div class="col-md-4">
+                <div class="card my-2">
+                    <img src="{{ item.image.url }}" alt="Card image" class="card-img-top image-thumbnail">
+                    <div class="card-body">
+                        <small class="card-text">Category: {{ item.category.name }}</small>
+                    </div>
+                    <a href="{% url 'photo' item.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
