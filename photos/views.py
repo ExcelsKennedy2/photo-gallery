@@ -28,12 +28,6 @@ from django.contrib.auth import login
 def gallery(request):
     user = request.user  # Get the logged-in user
     category_name = request.GET.get('category')
-    # category = request.GET.get('category')
-    #
-    # if category == None:
-    #     photos = Photo.objects.all()
-    # else:
-    #     photos = Photo.objects.filter(category__name=category)
 
     if category_name:
         photos = Photo.objects.filter(user=user, category__name=category_name)  # Filter by user and category
@@ -49,6 +43,7 @@ def gallery(request):
     return render(request, 'photos/gallery.html', context)
 
 
+@login_required(login_url='login')
 def viewPhoto(request, pk):
     photo = Photo.objects.get(pk=pk)
     item = get_object_or_404(Photo, pk=pk)
@@ -58,6 +53,7 @@ def viewPhoto(request, pk):
 
     return render(request, 'photos/photo.html', context)
 
+@login_required(login_url='login')
 def addPhoto(request):
     categories = Category.objects.all()
 
