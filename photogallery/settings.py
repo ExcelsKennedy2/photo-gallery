@@ -87,9 +87,11 @@ WSGI_APPLICATION = 'photogallery.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default="postgresql://photo%20gallery_owner:npg_hYHEGx29rVkq@ep-weathered-salad-a59ghkm4-pooler.us-east-2.aws.neon.tech/photo%20gallery?sslmode=require"
+        default="postgresql://photoAlbum_owner:npg_Qh6pdfcYTM5u@ep-winter-thunder-a53sik23-pooler.us-east-2.aws.neon.tech/photoAlbum?sslmode=require"
     )
 }
+
+
 
 
 # Password validation
