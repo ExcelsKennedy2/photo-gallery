@@ -34,7 +34,7 @@ def gallery(request):
     else:
         photos = Photo.objects.filter(user=user)  # Show only user's photos
 
-    categories = Category.objects.all()
+    categories = Category.objects.filter(user=user)
 
     context = {
         'categories': categories,
@@ -55,7 +55,8 @@ def viewPhoto(request, pk):
 
 @login_required(login_url='login')
 def addPhoto(request):
-    categories = Category.objects.all()
+    user = request.user
+    categories = Category.objects.filter(user=user)  # Only show user's categories
 
     if request.method == 'POST':
         data = request.POST
@@ -64,7 +65,7 @@ def addPhoto(request):
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
         elif data['category_new'] != '':
-            category, created = Category.objects.get_or_create(name=data['category_new'])
+            category, created = Category.objects.get_or_create(name=data['category_new'], user=user)
         else:
             category = None
 
