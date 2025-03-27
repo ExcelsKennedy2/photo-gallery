@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
+
     <style>
         .image-thumbnail{
             height: 200px;
@@ -11,9 +12,22 @@
             text-decoration: none;
             color: black;
         }
+        .header-bar{
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+        background: linear-gradient(90deg, #787c8a 0%, #202125 43%, #323437 100%);
+    }
+    .header-bar a{
+        text-decoration: none;
+        color: #fff;
+    }
     </style>
 
-<div class="container">
+<div class="container" style="margin-top: 80px;">
+<div class="header-bar mb-3"><h1>Hello {{ request.user|title }}</h1></div>
     <div class="row">
         <div class="col-md-3">
 

@@ -1,4 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
+# from cloudinary.models import CloudinaryField
+# import cloudinary.utils
 
 # Create your models here.
 
