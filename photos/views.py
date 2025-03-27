@@ -11,17 +11,37 @@ from django.contrib.auth import login
 
 # Create your views here.
 
+# @login_required(login_url='login')
+# def gallery(request):
+#     category = request.GET.get('category')
+#     if category == None:
+#         photos = Photo.objects.all()
+#     else:
+#         photos = Photo.objects.filter(category__name=category)
+#
+#     categories = Category.objects.all()
+#     context = {'categories': categories, 'photos': photos}
+#     return render(request, 'photos/gallery.html', context)
+
+
 @login_required(login_url='login')
 def gallery(request):
-    category = request.GET.get('category')
-    if category == None:
-        photos = Photo.objects.all()
+    user = request.user  # Get the logged-in user
+    category_name = request.GET.get('category')
+
+    if category_name:
+        photos = Photo.objects.filter(user=user, category__name=category_name)  # Filter by user and category
     else:
-        photos = Photo.objects.filter(category__name=category)
+        photos = Photo.objects.filter(user=user)  # Show only user's photos
 
     categories = Category.objects.all()
-    context = {'categories': categories, 'photos': photos}
+
+    context = {
+        'categories': categories,
+        'photos': photos
+    }
     return render(request, 'photos/gallery.html', context)
+
 
 def viewPhoto(request, pk):
     photo = Photo.objects.get(pk=pk)
